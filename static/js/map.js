@@ -40,7 +40,6 @@ $.getJSON("/static/js/neighborhoods.json", function(data) {
                         );
             
                         var popup = L.popup()
-                            .setLatLng(queryCoordinates)
                             .setContent(content)
                             .openOn(map);
                         layer.bindPopup(content);
