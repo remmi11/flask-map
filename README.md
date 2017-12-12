@@ -7,6 +7,7 @@ heroku login
 
 ## git clone git repo
 https://github.com/remmi11/flask-map.git
+
 Open the folder flask-map  with your favorite text editor or IDE.
 
 ## Install requirements
@@ -19,6 +20,7 @@ pip install -r requirements.txt
 
 ## Create a procfile
 Create a new file with Procfile as the name and do not add any extension. Add this line below
+
 ```web: gunicorn app:app```
 
 web is used by Heroku to start a web server for the application. The app:app specifies the module and application name. In our application we have the app module and our flask application is also called app. If your are different you can change them.
