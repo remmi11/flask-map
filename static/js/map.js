@@ -33,7 +33,7 @@ $.getJSON("/static/js/neighborhoods.json", function(data) {
     var geojson = L.geoJson(data, {
         onEachFeature: function (feature, layer) {            
                         content = (
-                            "<strong>Address: </strong>" + feature.properties.NAME + "<br>"
+                            "<strong>Name: </strong>" + feature.properties.NAME + "<br>"
                             + "<strong>Description: </strong>" + feature.properties.COMMPLAN + "<br>"
                             + "<strong>Surveyor: </strong>" + feature.properties.SHARED + "<br>"
                             + "<strong>Certify To: </strong>" + feature.properties.COALIT + "<br>"
