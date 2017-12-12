@@ -5,10 +5,11 @@ from sqlalchemy.orm import sessionmaker
 from tabledef import *
 import flask_login
 import datetime
+import logging
 engine = create_engine(connString, echo=True)
 
 app = Flask(__name__)
-
+app.secret_key = os.urandom(12)
 
 # timeout after inactivity testing.
 @app.before_request
@@ -73,5 +74,7 @@ def logout():
 
 
 if __name__ == "__main__":
-    app.secret_key = os.urandom(12)
     app.run()
+    app.logger.addHandler(logging.StreamHandler(sys.stdout))
+    app.logger.setLevel(logging.ERROR)
+ 
