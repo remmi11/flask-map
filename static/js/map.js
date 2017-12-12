@@ -39,9 +39,7 @@ $.getJSON("/static/js/neighborhoods.json", function(data) {
                             + "<strong>Certify To: </strong>" + feature.properties.COALIT + "<br>"
                         );
             
-                        var popup = L.popup()
-                            .setContent(content)
-                            .openOn(map);
+                        var popup = L.popup().setContent(content);
                         layer.bindPopup(content);
                         // layer.on({
                         //     mouseover: highlightFeature,
