@@ -30,7 +30,14 @@
             ]
           ]
         ]
-      }
+      },
+      "properties": {
+        "name": "Hungry Heart Cupcakes",
+        "address": "1212 SE Hawthorne Boulevard",
+        "website": "http://www.hungryheartcupcakes.com",
+        "gluten free": "no",
+        "open1": "Monday - Sunday, 11am - 9pm"
+    }
     },
     {
       "type": "Feature",
@@ -61,7 +68,15 @@
             ]
           ]
         ]
-      }
+      },
+      "properties": {
+        "name": "New Cascadia Traditional",
+        "address": "1700 SE 6th Avenue",
+        "website": "http://www.newcascadiatraditional.com/",
+        "gluten free": "yes",
+        "open1": "Tuesday - Friday, 7:30am - 5pm",
+        "open2": "Saturday, 8am - 4pm"
+    }
     },
     {
       "type": "Feature",
