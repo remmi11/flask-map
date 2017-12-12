@@ -31,9 +31,23 @@ L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=p
 
 $.getJSON("/static/js/neighborhoods.json", function(data) {
     var geojson = L.geoJson(data, {
-        onEachFeature: function (feature, layer) {
-            layer.bindPopup(feature.properties.NAME);
-        }
-    }).addTo(map);
+        onEachFeature: function (feature, layer) {            
+                        content = (
+                            "<strong>Address: </strong>" + feature.properties.NAME + "<br>"
+                            + "<strong>Description: </strong>" + feature.properties.COMMPLAN + "<br>"
+                            + "<strong>Surveyor: </strong>" + feature.properties.SHARED + "<br>"
+                            + "<strong>Certify To: </strong>" + feature.properties.COALIT + "<br>"
+                        );
+            
+                        var popup = L.popup()
+                            .setLatLng(queryCoordinates)
+                            .setContent(content)
+                            .openOn(map);
+                        layer.bindPopup(content);
+                        // layer.on({
+                        //     mouseover: highlightFeature,
+                        //     mouseout: resetHighlight
+                        // });
+                    }}).addTo(map);
     map.fitBounds(geojson.getBounds());
 });
