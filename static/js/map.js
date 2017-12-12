@@ -32,7 +32,7 @@ L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=p
 $.getJSON("/static/js/neighborhoods.json", function(data) {
     var geojson = L.geoJson(data, {
         onEachFeature: function (feature, layer) {
-            layer.bindPopup(feature.properties.name);
+            layer.bindPopup(feature.properties.NAME);
         }
     }).addTo(map);
     map.fitBounds(geojson.getBounds());
