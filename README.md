@@ -18,32 +18,31 @@ Create a virtual environment and install the dependencies by running.
 
 ## Create a procfile
 Create a new file with Procfile as the name and do not add any extension. Add this line below
-*web: gunicorn app:app
+```web: gunicorn app:app```
 
 web is used by Heroku to start a web server for the application. The app:app specifies the module and application name. In our application we have the app module and our flask application is also called app. If your are different you can change them.
 
 ## Update the requirements file by running
-*pip freeze > requirements.txt
+```pip freeze > requirements.txt```
 
 ## Deploy
 We are now ready to deploy our application. In the application folder run
-*heroku create flask-map
+```heroku create flask-map```
 
 The output of that command will be similar to this below. Take note of the application URL because it is where your app lives.
-
-'''
+```
 (myvenv) G:\PyProjects\flask-map_heroku>heroku create flask-map-heroku
 Creating flask-map-heroku... done
 https://flaskmap-api-heroku.herokuapp.com/| https://git.heroku.com/flaskmap-api-heroku.git
-'''
+```
 
 This https://git.heroku.com/flaskmap-api-heroku.git is the Heroku git remote repository where our application lives on Heroku. We now have to push our application to the master branch of the above git URL. Clone the repository if you have not been following along and push to the Heroku master .
 Now head over to your application URL to see the application API documentation as the homepage. You can see the url here as
 
-*git add .
-*git commit -am "make it better"
-*git push heroku master
-
+```git add .
+git commit -am "make it better"
+git push heroku master
+```
 
 
 Commands to traceback
