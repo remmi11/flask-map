@@ -14,7 +14,10 @@ engine = create_engine(connString, echo=True)
 Session = sessionmaker(bind=engine)
 session = Session()
 
-user = User("nhuntington","gdipass2017")
+# user = User("nhuntington","gdipass2017")
+# session.add(user)
+
+user = User("smunger","gdipass2017")
 session.add(user)
 
 # commit the record the database
