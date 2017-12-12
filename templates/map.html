@@ -7,14 +7,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/static/bower_components/bootstrap/dist/css/bootstrap.min.css" type="text/css">
     <link rel="stylesheet" href="/static/bower_components/leaflet/dist/leaflet.css" type="text/css">
+    <link rel="stylesheet" href="/static/bower_components/leaflet-measure/dist/leaflet-measure.css" type="text/css">
     <link rel="stylesheet" href="/static/style.css" type="text/css">
 
-    <link rel="stylesheet" href="/static/bower_components/leaflet/locate/L.Control.Locate.css" />
-    <link rel="stylesheet" href="/static/bower_components/leaflet/gcc_geosearch/l.gcc_geosearch.css" />
-
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDd8ggjAUt4Slz0yeqL5Ax1XMwrV5GJBnY&sensor=false&libraries=places"></script>
-
-
 </head>
 
 <body>
@@ -34,9 +30,17 @@
 
             <ul class="nav navbar-nav navbar-right">
                 {% if session['logged_in'] == True %}
-                <li><a href="/logout">Logout <span class="sr-only">(current)</span></a></li>
+                <li>
+                    <a href="/logout">Logout
+                        <span class="sr-only">(current)</span>
+                    </a>
+                </li>
                 {% else %}
-                <li><a href="#" data-toggle="modal" data-target="#myModal">Login <span class="sr-only">(current)</span></a></li>
+                <li>
+                    <a href="#" data-toggle="modal" data-target="#myModal">Login
+                        <span class="sr-only">(current)</span>
+                    </a>
+                </li>
                 {% endif %}
                 <!-- <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="false" aria-expanded="false">Help <span class="caret"></span></a>
@@ -63,9 +67,9 @@
                 herein is considered privileged and users must obtain a username and password from GDI, Inc. prior to using.
                 To obtain please email wtgeographer@gmail.com.</p>
             <p>
-                Note: Real property boundaries featured within do not represent a survey on the ground and only represent
-                approximations of such. Real property boundaries may include deed, lease, survey (section) lines, fences,
-                and any and all original grant lines.
+                Note: Real property boundaries featured within do not represent a survey on the ground and only represent approximations
+                of such. Real property boundaries may include deed, lease, survey (section) lines, fences, and any and all
+                original grant lines.
             </p>
 
             <p class="lead">
@@ -88,8 +92,8 @@
 
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 
-						<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-					</button>
+                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                    </button>
                     <img class="img-responsive" id="img_logo" style="height:150px;" src="http://beyondmapping.com/img/logo.png">
 
                 </div>
@@ -105,8 +109,7 @@
                                 <span id="text-login-msg">Type your username and password.</span>
                             </div>
                             </br>
-                            <input id="login_username" name='username' class="form-control" type="text" placeholder="Username"
-                                required>
+                            <input id="login_username" name='username' class="form-control" type="text" placeholder="Username" required>
                             </br>
                             <input id="login_password" name='password' class="form-control" type="password" placeholder="Password" required>
                         </div>
@@ -150,21 +153,13 @@
         </div>
     </div>
     <!-- END # MODAL LOGIN -->
-    <!-- <script src="/static/js/tracts.js"></script> -->
 
     <script src="/static/bower_components/jquery/dist/jquery.min.js "></script>
-
-    <!--<script src="./static/login.js "></script>-->
-
     <script src="/static/bower_components/bootstrap/dist/js/bootstrap.min.js "></script>
-    <script src="/static/bower_components/leaflet/dist/leaflet.js "></script>
-
-    <!-- <script src="/static/bower_components/leaflet-ajax/dist/leaflet.ajax.min.js "></script> -->
-
+    <script src="/static/bower_components/leaflet/dist/leaflet.js"></script>
+    <script src="/static/bower_components/leaflet-measure/dist/leaflet-measure.min.js"></script>
+    
     <script>document.write("<script type='text/javascript' src='/static/js/map.js?timestamp=" + Date.now() + "'><\/script>");</script>
-
-    <!--<script src="/static/js/map.js?timestamp=1496935660453"></script>-->
-
 </body>
 
 </html>

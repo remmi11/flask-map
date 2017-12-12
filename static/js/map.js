@@ -1,33 +1,29 @@
-var center = new L.LatLng(35.174930849, -101.83296203);
-var map = new L.Map('map', {
-    center: center,
-    zoom: 12,
+
+var mbAttr = 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
+    '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+    'Imagery © <a href="http://mapbox.com">Mapbox</a>',
+mbUrl = 'https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw';
+
+
+var streets = L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
     maxZoom: 18,
-    //maxNativeZoom:21,
-    zoomControl: false,
-    detectRetina: true
+    attribution: mbAttr,
+    id: 'mapbox.streets'
 });
 
-// $.getJSON("/static/js/cupcakes.json", function(data) {
-//     var geojson = L.geoJson(data, {
-//         onEachFeature: function (feature, layer) {
-//             layer.bindPopup(feature.properties.name);
-//         }
-//     });
-//     var map = L.map('map').fitBounds(geojson.getBounds());
-//     cupcakeTiles.addTo(map);
-//     geojson.addTo(map);
-// });
-
-L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
+var satellite = L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
     maxZoom: 18,
-    attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
-        '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
-        'Imagery © <a href="http://mapbox.com">Mapbox</a>',
-    id: 'mapbox.streets'
-}).addTo(map);
+    attribution: mbAttr,
+    id: 'mapbox.satellite'
+});
 
-//$.getJSON("/static/js/tracts.json", function(data) { addDataToMap(data, map); });
+var map = new L.Map('map', {
+    maxZoom: 18,
+    zoomControl: false,
+    detectRetina: true,
+    layers: [streets, satellite]
+});
+
 
 $.getJSON("/static/js/neighborhoods.json", function(data) {
     var geojson = L.geoJson(data, {
@@ -48,3 +44,19 @@ $.getJSON("/static/js/neighborhoods.json", function(data) {
                     }}).addTo(map);
     map.fitBounds(geojson.getBounds());
 });
+
+var baseMaps = {
+    "Satellite": satellite,
+    "Streets": streets
+
+};
+
+L.control.layers(baseMaps).addTo(map);
+var measureControl = new L.Control.Measure({
+    position: 'topright',
+    primaryLengthUnit: 'feet',
+    secondaryLengthUnit: 'miles',
+    activeColor: '#ffff00',
+    completedColor: '#f08a16'
+});
+measureControl.addTo(map);
