@@ -11,10 +11,11 @@ Open the folder flask-map  with your favorite text editor or IDE.
 
 ## Install requirements
 Create a virtual environment and install the dependencies by running.
-
-*Virtualenv myvenv
-*Myvenv\scripts\activate
-*pip install -r requirements.txt
+```
+virtualenv myvenv
+myvenv\scripts\activate
+pip install -r requirements.txt
+```
 
 ## Create a procfile
 Create a new file with Procfile as the name and do not add any extension. Add this line below
@@ -36,20 +37,22 @@ Creating flask-map-heroku... done
 https://flaskmap-api-heroku.herokuapp.com/| https://git.heroku.com/flaskmap-api-heroku.git
 ```
 
-This https://git.heroku.com/flaskmap-api-heroku.git is the Heroku git remote repository where our application lives on Heroku. We now have to push our application to the master branch of the above git URL. Clone the repository if you have not been following along and push to the Heroku master .
-Now head over to your application URL to see the application API documentation as the homepage. You can see the url here as
+This https://git.heroku.com/flaskmap-api-heroku.git is the Heroku git remote repository where our application lives on Heroku. 
 
-```git add .
+We now have to push our application to the master branch of the above git URL. 
+
+```
+git add .
 git commit -am "make it better"
 git push heroku master
 ```
 
 
-Commands to traceback
-1>   heroku logs command will show you the logs where you have app is failing or crashing
-2> type heroku logs - tailf to see the recent logs in realtime
-3> add some logging module to your code for better readability of logs in heroku logs
-So i added some code in app.py 
-Your final app.py code contains
+## Commands to traceback
+```
+1)heroku logs command will show you the logs where you have app is failing or crashing
+2)type heroku logs - tailf to see the recent logs in realtime
+3)add some logging module to your code for better readability of logs in heroku logs
+```
 
 link of code
