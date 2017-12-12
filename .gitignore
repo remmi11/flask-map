@@ -2,3 +2,4 @@ myvenv/
 *.pyc
 .DS_Store
 .bowerrc
+static/boundaries/

@@ -29,7 +29,7 @@ L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=p
 
 //$.getJSON("/static/js/tracts.json", function(data) { addDataToMap(data, map); });
 
-$.getJSON("/static/js/cupcakes.json", function(data) {
+$.getJSON("/static/js/neighborhoods.json", function(data) {
     var geojson = L.geoJson(data, {
         onEachFeature: function (feature, layer) {
             layer.bindPopup(feature.properties.name);
