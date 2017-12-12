@@ -57,4 +57,3 @@ git push heroku master
 3)add some logging module to your code for better readability of logs in heroku logs
 ```
 
-link of code
