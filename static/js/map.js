@@ -1,62 +1,69 @@
+L.mapbox.accessToken = 'pk.eyJ1Ijoid3RnZW9ncmFwaGVyIiwiYSI6ImNpdGFicWJqYjAwdzUydHM2M2g0MmhsYXAifQ.oO-MYNUC2tVeXa1xYbCIyw';
+var map = L.mapbox.map('map', 'mapbox.outdoors');
+var markerList = document.getElementById('marker-list');
 
-var mbAttr = 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
-    '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
-    'Imagery © <a href="http://mapbox.com">Mapbox</a>',
-mbUrl = 'https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw';
-
-
-var streets = L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
-    maxZoom: 18,
-    attribution: mbAttr,
-    id: 'mapbox.streets'
-});
-
-var satellite = L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
-    maxZoom: 18,
-    attribution: mbAttr,
-    id: 'mapbox.satellite'
-});
-
-var map = new L.Map('map', {
-    maxZoom: 18,
-    zoomControl: false,
-    detectRetina: true,
-    layers: [streets, satellite]
-});
+L.control.layers({
+    'Topo': L.mapbox.tileLayer('mapbox.outdoors').addTo(map),
+    'Satellite': L.mapbox.tileLayer('mapbox.satellite')
+}).addTo(map);
 
 
-$.getJSON("/static/js/neighborhoods.json", function(data) {
-    var geojson = L.geoJson(data, {
-        onEachFeature: function (feature, layer) {            
-                        content = (
-                            "<strong>Name: </strong>" + feature.properties.NAME + "<br>"
-                            + "<strong>Description: </strong>" + feature.properties.COMMPLAN + "<br>"
-                            + "<strong>Surveyor: </strong>" + feature.properties.SHARED + "<br>"
-                            + "<strong>Certify To: </strong>" + feature.properties.COALIT + "<br>"
-                        );
-            
-                        var popup = L.popup().setContent(content);
-                        layer.bindPopup(content);
-                        // layer.on({
-                        //     mouseover: highlightFeature,
-                        //     mouseout: resetHighlight
-                        // });
-                    }}).addTo(map);
-    map.fitBounds(geojson.getBounds());
-});
-
-var baseMaps = {
-    "Satellite": satellite,
-    "Streets": streets
-
+var defaultStyle = {
+    color: "#ff9600",
+    weight: 2,
+    opacity: 0.6,
+    fillOpacity: 0.5,
+    fillColor: "#ff9600"
 };
 
-L.control.layers(baseMaps).addTo(map);
-var measureControl = new L.Control.Measure({
-    position: 'topright',
-    primaryLengthUnit: 'feet',
-    secondaryLengthUnit: 'miles',
-    activeColor: '#ffff00',
-    completedColor: '#f08a16'
+var kenStyle = {
+    color: "#0067c5",
+    weight: 2,
+    opacity: 0.6,
+    fillOpacity: 0.5,
+    fillColor: "#0067c5"
+};
+
+var onEachFeature = function(feature, layer) {
+    if(feature.properties.NAME === 'Kenneth Kearney'){
+        layer.setStyle(kenStyle);
+    } else {
+        layer.setStyle(defaultStyle);
+      }
+    layer.bindPopup(
+        "<b>Tax-Id: </b>" +
+        feature.properties.PROP_ID +
+        "</br>" +
+        "<b>Owner: </b>" +
+        feature.properties.Owner +
+        "</br>" +
+        "<b>Value: </b>" +
+        feature.properties.ASSD_VALUE +
+        "</br>" +
+        "<b>Acres: </b>" +
+        feature.properties.ACREAGE
+    )
+    };
+
+var featureLayer = L.geoJson(parcels, {
+    onEachFeature: onEachFeature
 });
-measureControl.addTo(map);
+
+map.addLayer(featureLayer);
+map.fitBounds(featureLayer.getBounds());
+
+// Testing linked table
+// L.mapbox.accessToken = 'pk.eyJ1Ijoid3RnZW9ncmFwaGVyIiwiYSI6ImNpdGFicWJqYjAwdzUydHM2M2g0MmhsYXAifQ.oO-MYNUC2tVeXa1xYbCIyw';
+// var map = L.mapbox.map('map', 'wtgeographer.44du2uz4');
+// var markerList = document.getElementById('marker-list');
+
+// map.featureLayer.on('ready', function(e) {
+//     map.featureLayer.eachLayer(function(layer) {
+//         var item = markerList.appendChild(document.createElement('li'));
+//         item.innerHTML = layer.toGeoJSON().properties.NAME;
+//         item.onclick = function() {
+//            map.setView(layer.getLatLng(), 14);
+//            layer.openPopup();
+//         };
+//     });
+// });
